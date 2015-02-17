@@ -5,14 +5,12 @@ variable "aws_key_name" {}
 variable "aws_region" {
   default = "us-west-2"
 }
+variable "bosh_stemcell_type" {
+  default = "centos"
+}
+
 variable "network" {
 	default = "10.10"
-}
-variable "cf_admin_pass" {
-  default = "c1oudc0wc1oudc0w"
-}
-variable "bosh_version" {
-  default = "2827"
 }
 
 variable "aws_centos_ami" {

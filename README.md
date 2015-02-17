@@ -1,22 +1,18 @@
-terraform-aws-bosh
-==================
+terraform-aws-stemcell-creation
+===============================
 
-This project will create an AWS VPC with subnets/route tables, a bastion VM (aka jumpbox/inception server), NAT (for outbound traffic), and a Micro BOSH.
+This project will bootstrap a bastion/work VM on AWS and use it to create a new BOSH stemcell.
+
+It will use terraform create an AWS VPC with subnets/route tables, a bastion VM (aka jumpbox/inception server), NAT (for outbound traffic), and a Micro BOSH.
 
 Architecture
 ------------
 
-This terraform project will deploy the following networking and instances (pretty diagram from https://ide.visualops.io):
-
-![](http://cl.ly/image/1u1F462W2W0p/terraform-aws-bosh_architecture.png)
-
-We rely on one other terraform repository:
+We rely on one other terraform repository for convenience:
 
 -	[terraform-aws-vpc](https://github.com/cloudfoundry-community/terraform-aws-vpc) repo creates the base VPC infrastructure, including a bastion subnet, the`microbosh` subnet, a NAT server, various route tables, and the VPC itself
 
-This repository then creates a bastion VM and uses it to bootstrap a Micro BOSH (using the [bosh-bootstrap](https://github.com/cloudfoundry-community/bosh-bootstrap) project) into one of the private subnets.
-
-To access the BOSH, first SSH into the bastion VM.
+To access the BOSH stemcell & tools, first SSH into the bastion VM.
 
 Deploy
 ------
@@ -37,12 +33,12 @@ Optionally for using the `Unattended Install` instruction, install git.
 ### Setup
 
 ```bash
-git clone https://github.com/cloudfoundry-community/terraform-aws-bosh
-cd terraform-aws-cf-bosh
+git clone https://github.com/cloudfoundry-community/terraform-aws-stemcell-creation
+cd terraform-aws-stemcell-creation
 cp terraform.tfvars.example terraform.tfvars
 ```
 
-Next, edit `terraform.tfvars` using your text editor and fill out the variables with your own values (AWS credentials, AWS region, etc).
+Next, edit `terraform.tfvars` using your text editor and fill out the variables with your own values (AWS credentials, AWS region, etc); and the type of stemcell to create.
 
 ### Deploy
 
